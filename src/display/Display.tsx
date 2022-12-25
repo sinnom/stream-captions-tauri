@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { DisplayText } from './DisplayText';
 
 export interface IDisplayProps {
@@ -18,9 +18,12 @@ export function Display(props: IDisplayProps) {
     }
   };
 
+  const audioRef: React.MutableRefObject<HTMLAudioElement | null> = useRef(null);
+
   return (
     <div>
-      <DisplayText text={message} key={key} />
+      <audio src="./assets/twoTone2.ogg" ref={audioRef} />
+      <DisplayText text={message} audioEl={audioRef} key={key} />
     </div>
   );
 }
