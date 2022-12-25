@@ -55,6 +55,7 @@
     "windows": [
       {
         "label": "controls",
+        "url": "controls.html",
         "fullscreen": false,
         "height": 600,
         "resizable": true,
@@ -63,6 +64,7 @@
       },
       {
         "label": "display",
+        "url": "display.html",
         "fullscreen": false,
         "height": 600,
         "resizable": true,
