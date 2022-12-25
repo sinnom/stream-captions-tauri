@@ -1,6 +1,7 @@
-# Tauri + React + Typescript
+# Video Game Style Stream Captions
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
+## References
+https://www.youtube.com/watch?v=p5np6ZjP4pI
 
 ## Recommended IDE Setup
 
