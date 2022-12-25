@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
+import { DisplayText } from './DisplayText';
 
 export interface IDisplayProps {
 }
@@ -9,6 +10,7 @@ export function Display(props: IDisplayProps) {
 
   const bc = new BroadcastChannel("test_channel");
   bc.onmessage = (event) => {
+    console.log("message received");
     if (event instanceof MessageEvent) {
       setMessage(event.data)
     }
@@ -16,7 +18,7 @@ export function Display(props: IDisplayProps) {
 
   return (
     <div>
-      {message}
+      <DisplayText text={message} />
     </div>
   );
 }
