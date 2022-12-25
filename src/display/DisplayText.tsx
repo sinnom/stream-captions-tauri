@@ -22,7 +22,7 @@ export const DisplayText = function DisplayText(props: IDisplayTextProps) {
       });
     }, 200);
     return () => clearInterval(intervalId);
-  }, [props.text])
+  }, [])
 
   return (
     <div>
