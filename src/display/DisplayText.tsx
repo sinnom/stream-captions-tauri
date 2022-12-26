@@ -23,6 +23,23 @@ export const DisplayText = function DisplayText(props: IDisplayTextProps) {
     });
   };
 
+  function buildChars(defaultDelay: number) {
+    const delayMultiplierMap = new Map([
+      [',', 2]
+    ]);
+    const delayMultiplier = delayMultiplierMap.get(props.text.slice(-1)) ?? 1;
+    const delay = defaultDelay * delayMultiplier;
+
+    setCharIdx(c => {
+      if (c + 1 > props.text.length) {
+        return c;
+      } else {
+        setTimeout(buildChars, delay);
+        return c + 1;
+      }
+    });
+  }
+
   useEffect(() => {
     setCharIdx(c => 0);
     const timer = setInterval(addLetter, 50)
@@ -33,7 +50,7 @@ export const DisplayText = function DisplayText(props: IDisplayTextProps) {
 
   return (
     <div>
-      <DisplayTextAudio text={props.text.slice(0, charIdx)} soundDuration={100} />
+      <DisplayTextAudio text={props.text.slice(0, charIdx)} soundDuration={50} />
       {props.text.slice(0, charIdx)}
     </div >
   );
