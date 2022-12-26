@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { DisplayText } from './DisplayText';
+import soundByte from '../assets/twoTone2.mp3';
+
 
 export interface IDisplayProps {
 }
@@ -24,6 +26,7 @@ export function Display(props: IDisplayProps) {
 
   return (
     <div>
+      <audio ref={audioRef} src={soundByte}></audio>
       <DisplayText text={message} audioEl={audioRef} key={key} />
     </div>
   );

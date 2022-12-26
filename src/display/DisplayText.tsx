@@ -1,6 +1,11 @@
-import * as React from 'react';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import soundByte from '../assets/twoTone2.mp3';
+import { Howl, Howler } from 'howler';
+import { DisplayTextAudio } from './DisplayTextAudio';
 
+let sound = new Howl({
+  src: [soundByte]
+});
 
 export interface IDisplayTextProps {
   text: string;
@@ -20,7 +25,6 @@ export const DisplayText = function DisplayText(props: IDisplayTextProps) {
         clearInterval(intervalRef.current);
         return c;
       } else {
-
         return c + 1;
       }
     });
@@ -28,16 +32,16 @@ export const DisplayText = function DisplayText(props: IDisplayTextProps) {
 
   useEffect(() => {
     setCharIdx(c => 0);
-    const timer = setInterval(addLetterWithSound, 200)
+    const timer = setInterval(addLetterWithSound, 100)
     intervalRef.current = timer;
     return () => clearInterval(timer);
   }, []);
 
 
-
   return (
     <div>
+      <DisplayTextAudio text={props.text.slice(0, charIdx)} soundDuration={100} />
       {props.text.slice(0, charIdx)}
-    </div>
+    </div >
   );
 }
