@@ -15,7 +15,7 @@ export interface IDisplayTextAudioProps {
 
 export function DisplayTextAudio(props: IDisplayTextAudioProps) {
   useEffect(() => {
-    if (props.text !== '') {
+    if (props.text !== '' && !props.text.endsWith(' ')) {
       const instance = sound.play();
       setTimeout(() => sound.stop(instance), props.soundDuration);
     }
