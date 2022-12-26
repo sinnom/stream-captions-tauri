@@ -24,7 +24,6 @@ export function Display(props: IDisplayProps) {
 
   return (
     <div>
-      <audio src="./assets/twoTone2.ogg" ref={audioRef} />
       <DisplayText text={message} audioEl={audioRef} key={key} />
     </div>
   );
