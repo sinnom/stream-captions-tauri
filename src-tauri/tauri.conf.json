@@ -61,15 +61,6 @@
         "resizable": true,
         "title": "Stream Captions Controls",
         "width": 800
-      },
-      {
-        "label": "display",
-        "url": "display.html",
-        "fullscreen": false,
-        "height": 600,
-        "resizable": true,
-        "title": "Stream Captions Display",
-        "width": 800
       }
     ]
   }
