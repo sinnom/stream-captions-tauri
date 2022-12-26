@@ -1,17 +1,10 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import soundByte from '../assets/twoTone2.mp3';
-import { Howl, Howler } from 'howler';
 import { DisplayTextAudio } from './DisplayTextAudio';
-
-let sound = new Howl({
-  src: [soundByte]
-});
 
 export interface IDisplayTextProps {
   text: string;
   audioEl: MutableRefObject<HTMLAudioElement | null>;
 }
-
 
 export const DisplayText = function DisplayText(props: IDisplayTextProps) {
   // Text starts out unrendered, and becomes visible char by char
@@ -19,7 +12,7 @@ export const DisplayText = function DisplayText(props: IDisplayTextProps) {
   const [charIdx, setCharIdx] = useState(0);
   const intervalRef: MutableRefObject<NodeJS.Timer | null> = useRef(null);
 
-  const addLetterWithSound = () => {
+  const addLetter = () => {
     setCharIdx(c => {
       if (c + 1 > props.text.length && intervalRef.current !== null) {
         clearInterval(intervalRef.current);
@@ -32,7 +25,7 @@ export const DisplayText = function DisplayText(props: IDisplayTextProps) {
 
   useEffect(() => {
     setCharIdx(c => 0);
-    const timer = setInterval(addLetterWithSound, 100)
+    const timer = setInterval(addLetter, 50)
     intervalRef.current = timer;
     return () => clearInterval(timer);
   }, []);
