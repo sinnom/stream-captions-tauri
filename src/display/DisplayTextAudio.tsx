@@ -8,7 +8,6 @@ let sound = new Howl({
   pool: 10,
 })
 
-
 export interface IDisplayTextAudioProps {
   text: string,
   soundDuration: number,
@@ -17,15 +16,11 @@ export interface IDisplayTextAudioProps {
 export function DisplayTextAudio(props: IDisplayTextAudioProps) {
   useEffect(() => {
     if (props.text !== '') {
-      sound.stop();
       const instance = sound.play();
       setTimeout(() => sound.stop(instance), props.soundDuration);
     }
     return () => { sound.stop() };
   }, [props.text]);
-  return (
-    <div>
-      {props.text}
-    </div>
-  );
+
+  return null;
 }
