@@ -7,7 +7,13 @@ export function ControlsOpenDisplay(props: IControlsOpenDisplayProps) {
   function handleClick() {
     const displayWindow = WebviewWindow.getByLabel("display");
     if (displayWindow === null) {
-      new WebviewWindow('display', { url: "display.html" });
+      new WebviewWindow('display', {
+        url: "display.html",
+        width: 400,
+        height: 100,
+        decorations: false,
+        // hiddenTitle: true
+      });
     } else {
       displayWindow.setFocus();
     }

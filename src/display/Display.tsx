@@ -11,6 +11,7 @@ export function Display(props: IDisplayProps) {
   const [key, setKey] = useState(0);
   const [broadcastChannel] = useState(new BroadcastChannel("test_channel"));
 
+  // Subscribe to messages coming from Control windows
   useEffect(() => {
     broadcastChannel.onmessage = (event) => {
       console.log("message received");
