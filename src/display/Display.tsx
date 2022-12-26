@@ -26,7 +26,7 @@ export function Display(props: IDisplayProps) {
   const audioRef: React.MutableRefObject<HTMLAudioElement | null> = useRef(null);
 
   return (
-    <div className="display">
+    <div>
       <audio ref={audioRef} src={soundByte}></audio>
       <DisplayText text={message} audioEl={audioRef} key={key} />
     </div>

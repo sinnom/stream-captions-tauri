@@ -22,6 +22,8 @@
 .display {
   font-family: 'Rainy Hearts', monospace;
   font-size: 2rem;
+  background-color: gray;
+  margin: 0px;
 }
 
 .container {
