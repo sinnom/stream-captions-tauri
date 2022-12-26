@@ -10,31 +10,24 @@ export const DisplayText = function DisplayText(props: IDisplayTextProps) {
   // Text starts out unrendered, and becomes visible char by char
   // Index starts at 1. An index of 0 indicates no text should be rendered.
   const [charIdx, setCharIdx] = useState(0);
-  const intervalRef: MutableRefObject<NodeJS.Timer | null> = useRef(null);
+  const timer = useRef<NodeJS.Timeout | null>(null);
 
-  const addLetter = () => {
-    setCharIdx(c => {
-      if (c + 1 > props.text.length && intervalRef.current !== null) {
-        clearInterval(intervalRef.current);
-        return c;
-      } else {
-        return c + 1;
-      }
-    });
-  };
-
-  function buildChars(defaultDelay: number) {
+  function buildChars(defaultDelay: number, nextCharIdx: number) {
     const delayMultiplierMap = new Map([
-      [',', 2]
+      [',', 4],
+      ['.', 8]
     ]);
-    const delayMultiplier = delayMultiplierMap.get(props.text.slice(-1)) ?? 1;
+    const delayMultiplier = delayMultiplierMap.get(props.text.charAt(nextCharIdx)) ?? 1;
     const delay = defaultDelay * delayMultiplier;
-
+    console.log("buildChars called");
     setCharIdx(c => {
       if (c + 1 > props.text.length) {
         return c;
       } else {
-        setTimeout(buildChars, delay);
+        if (timer.current) {
+          clearTimeout(timer.current);
+        }
+        timer.current = setTimeout(() => buildChars(defaultDelay, c + 1), delay);
         return c + 1;
       }
     });
@@ -42,9 +35,9 @@ export const DisplayText = function DisplayText(props: IDisplayTextProps) {
 
   useEffect(() => {
     setCharIdx(c => 0);
-    const timer = setInterval(addLetter, 50)
-    intervalRef.current = timer;
-    return () => clearInterval(timer);
+    // timer.current = setTimeout(() => buildChars(100), 100);
+    buildChars(100, 0);
+    return () => { timer.current && clearTimeout(timer.current) };
   }, []);
 
 
