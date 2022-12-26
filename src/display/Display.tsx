@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { DisplayText } from './DisplayText';
 
 export interface IDisplayProps {
@@ -8,15 +7,18 @@ export interface IDisplayProps {
 export function Display(props: IDisplayProps) {
   const [message, setMessage] = useState('');
   const [key, setKey] = useState(0);
+  const [broadcastChannel] = useState(new BroadcastChannel("test_channel"));
 
-  const bc = new BroadcastChannel("test_channel");
-  bc.onmessage = (event) => {
-    console.log("message received");
-    if (event instanceof MessageEvent) {
-      setMessage(event.data);
-      setKey(Math.random())
-    }
-  };
+  useEffect(() => {
+    broadcastChannel.onmessage = (event) => {
+      console.log("message received");
+      if (event instanceof MessageEvent) {
+        setMessage(event.data);
+        setKey(Math.random())
+      }
+    };
+    return () => { broadcastChannel.onmessage = null; };
+  }, []);
 
   const audioRef: React.MutableRefObject<HTMLAudioElement | null> = useRef(null);
 
