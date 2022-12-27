@@ -87,7 +87,7 @@
     "windows": [
       {
         "label": "controls",
-        "url": "controls.html",
+        "url": "index.html",
         "fullscreen": false,
         "height": 600,
         "resizable": true,
